@@ -7,10 +7,13 @@
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
-filetype off "disable file type detection for loading specific options
+filetype plugin indent on "disable file type detection for loading specific options
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
   Plugin 'gmarik/Vundle.vim'
+  " Elixir
+  Plugin 'elixir-lang/vim-elixir'
+
   Plugin 'SirVer/ultisnips'
   Plugin 'Townk/vim-autoclose'
   Plugin 'scrooloose/nerdcommenter'
@@ -28,7 +31,6 @@ call vundle#begin()
   Plugin 'digitaltoad/vim-jade'
   Plugin 'kien/ctrlp.vim'
   Plugin 'thoughtbot/vim-rspec'
-  Plugin 'tpope/vim-dispatch'
   Plugin 'tpope/vim-rvm'
   Plugin 'scrooloose/syntastic'
   Plugin 'airblade/vim-gitgutter'
@@ -36,6 +38,18 @@ call vundle#begin()
   Plugin 'bronson/vim-trailing-whitespace'
   Plugin 'tpope/vim-rails'
   Plugin 'kablamo/vim-git-log'
+  Plugin 't9md/vim-ruby-xmpfilter'
+  Plugin 'junegunn/goyo.vim'
+  Plugin 'morhetz/gruvbox'
+
+  " Clojure
+  "Plugin 'tpope/vim-fireplace'
+  "Plugin 'guns/vim-clojure-static'
+  "Plugin 'tpope/vim-salve'
+  "Plugin 'tpope/vim-projectionist'
+  "Plugin 'tpope/vim-dispatch'
+  "Plugin 'dgrnbrg/vim-redl'
+
 call vundle#end()
 
 filetype plugin indent on "enable loading plugins and indents based on file type (required for Vundle)
@@ -69,8 +83,10 @@ syntax enable "turn on syntax highlighting
 set ruler "show the line and column number of the cursor position
 set laststatus=2 "always show statusline
 set t_Co=256
-let g:solarized_termcolors=256
+"let g:solarized_termcolors=256
 set background=dark
+
+colorscheme gruvbox
 
 " => Completion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -88,7 +104,7 @@ set tabstop=2 "number of spaces that a <Tab> in the file counts for
 set softtabstop=2 "number of spaces that a <Tab> counts for while performing editing operations
 set shiftwidth=2 "number of spaces to use for each step of (auto)indent
 set expandtab "use the appropriate number of spaces to insert a <Tab>.
-set smarttab "makes a <Tab> in front of a line insert blanks according to 'shiftwidth'
+"set smarttab "makes a <Tab> in front of a line insert blanks according to 'shiftwidth'
 
 " => CtrlP
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -159,3 +175,27 @@ highlight clear SignColumn
 let g:gitgutter_highlight_lines = 0
 let g:gitgutter_realtime = 1
 let g:gitgutter_eager = 1
+
+let g:xmpfilter_cmd = "seeing_is_believing"
+
+"autocmd FileType ruby nmap <buffer> <C-m> <Plug>(seeing_is_believing-mark)
+"autocmd FileType ruby xmap <buffer> <C-m> <Plug>(seeing_is_believing-mark)
+"autocmd FileType ruby imap <buffer> <C-m> <Plug>(seeing_is_believing-mark)
+
+autocmd FileType ruby nmap <buffer> <C-c> <Plug>(seeing_is_believing-clean)
+autocmd FileType ruby xmap <buffer> <C-c> <Plug>(seeing_is_believing-clean)
+autocmd FileType ruby imap <buffer> <C-c> <Plug>(seeing_is_believing-clean)
+
+" xmpfilter compatible
+autocmd FileType ruby nmap <buffer> <C-r> <Plug>(seeing_is_believing-run_-x)
+autocmd FileType ruby xmap <buffer> <C-r> <Plug>(seeing_is_believing-run_-x)
+autocmd FileType ruby imap <buffer> <C-r> <Plug>(seeing_is_believing-run_-x)
+
+" auto insert mark at appropriate spot.
+autocmd FileType ruby nmap <buffer> <F5> <Plug>(seeing_is_believing-run)
+autocmd FileType ruby xmap <buffer> <F5> <Plug>(seeing_is_believing-run)
+autocmd FileType ruby imap <buffer> <F5> <Plug>(seeing_is_believing-run)
+
+" vim-redl
+let g:redl_use_vsplit = 1
+imap <silent> <C-S-K> <Plug>clj_repl_uphist.
