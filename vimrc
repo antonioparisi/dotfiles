@@ -7,7 +7,7 @@
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
-filetype plugin indent on "disable file type detection for loading specific options
+filetype plugin indent off "disable file type detection for loading specific options
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
   Plugin 'gmarik/Vundle.vim'
